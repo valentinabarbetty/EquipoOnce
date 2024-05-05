@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragment_login">
+    <fragment
+        android:id="@+id/fragment_login"
+        android:name="com.uv.dogappuv.view.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_logged_in"
+            app:destination="@id/fragment_admin_citas" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_admin_citas"
+        android:name="com.uv.dogappuv.view.fragments.AdminCitasFragment"
+        android:label="AdminCitas"
+        tools:layout="@layout/fragment_admin_citas">
+        <action
+            android:id="@+id/action_add_cita"
+            app:destination="@id/fragment_nueva_cita" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_nueva_cita"
+        android:name="com.uv.dogappuv.view.fragments.NuevaCitaFragment"
+        android:label="NuevaCita"
+        tools:layout="@layout/fragment_nueva_cita">
+    </fragment>
+</navigation>
