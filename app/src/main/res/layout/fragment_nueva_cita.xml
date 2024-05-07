@@ -8,7 +8,9 @@
         android:layout_height="match_parent"
         tools:context=".fragment.NuevaCitaFraggment">
 
-
+        <include
+            android:id="@+id/contentToolbar"
+            layout="@layout/toolbar" />
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
