@@ -12,46 +12,99 @@
             android:id="@+id/contentToolbar"
             layout="@layout/toolbar" />
 
-        <EditText
-            style="@style/Widget.Material3.TextInputLayout.FilledBox"
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="150dp"
-            android:hint="Nombre de la mascota"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints"/>
-        <EditText
-            android:id="@+id/etRaza"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:hint="Raza"
-            android:layout_marginVertical="20dp"
-            tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toBottomOf="@id/etName"/>
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:id="@+id/etPropietario"
+            android:id="@+id/inputNombreMascota"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:hint="Nombre del propietario"
-            android:layout_marginVertical="50dp"
+            android:layout_marginHorizontal="36dp"
+            android:hint="Nombre de la mascota"
+            android:layout_marginVertical="150dp"
             tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toBottomOf="@id/etRaza"/>
-        <EditText
-            android:id="@+id/etTelefono"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombreMascota"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/inputRaza"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:hint="Teléfono"
-            android:layout_marginVertical="20dp"
+            android:layout_marginHorizontal="36dp"
+            android:hint="Raza"
+            android:layout_marginVertical="30dp"
             tools:ignore="MissingConstraints"
-            app:layout_constraintTop_toBottomOf="@id/etPropietario"/>
+            app:layout_constraintTop_toBottomOf="@id/inputNombreMascota">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRaza"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/inputPropietario"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:hint="Nombre del propietario"
+            android:layout_marginVertical="30dp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@id/inputRaza">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPropietario"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/inputTelefono"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:hint="Teléfono"
+            android:layout_marginVertical="30dp"
+            tools:ignore="MissingConstraints"
+            app:layout_constraintTop_toBottomOf="@id/inputPropietario">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:backgroundTint="@color/rosa"
+            app:layout_constraintStart_toStartOf="@id/inputTelefono"
+            app:layout_constraintEnd_toEndOf="@id/inputTelefono"
+            app:layout_constraintTop_toBottomOf="@id/inputTelefono"
+            android:text="Guardar Cita"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:drawableLeft="@drawable/save_24"
+            android:drawablePadding="8dp"/>
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/rosa"
+            app:layout_constraintStart_toStartOf="@id/inputTelefono"
+            app:layout_constraintTop_toBottomOf="@id/inputTelefono" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

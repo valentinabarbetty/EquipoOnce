@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingUtil
 import com.uv.dogappuv.R
+import com.uv.dogappuv.databinding.FragmentNuevaCitaBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +39,36 @@ class NuevaCitaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nueva_cita, container, false)
+        val binding: FragmentNuevaCitaBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_nueva_cita, container, false)
+
+        setupSpinner(binding)
+
+        return binding.root
+    }
+
+    private fun setupSpinner(binding: FragmentNuevaCitaBinding) {
+        // Define an array of items for the spinner, including "Síntomas" as the default item
+        val items = arrayOf("Síntomas", "Solo duerme", "No come", "Fractura extremidad", "Tiene pulgas", "Tiene garrapatas", "Bota demasiado pelo")
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        binding.spinner.adapter = adapter
+
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View?, position: Int, id: Long) {
+                // Handle the selection event here
+                if (position != 0) {
+                    val selectedItem = parentView.getItemAtPosition(position) as String
+                    // Do something with the selected item
+                }
+            }
+
+            override fun onNothingSelected(parentView: AdapterView<*>) {
+                // Do nothing when nothing is selected
+            }
+        }
     }
 
     companion object {

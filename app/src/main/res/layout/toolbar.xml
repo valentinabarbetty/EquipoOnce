@@ -1,10 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="ExtraText">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,10 +10,34 @@
         android:layout_height="180dp"
         android:background="@drawable/tb"
         android:layout_marginTop="-80dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-    android:layout_gravity="center_horizontal"> <!-- Center the toolbar horizontally -->
+    android:layout_marginStart="20dp"
+    android:layout_marginEnd="20dp"
+  >
+
+    <!-- Icon on the left -->
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back_36"
+            android:padding="30dp"
+            android:clickable="true"
+            android:layout_marginTop="90dp"
+            />
+
+    <!-- Title centered -->
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nueva Cita"
+        android:textSize="30sp"
+        android:paddingLeft="5dp"
+        android:textColor="@android:color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"/> <!-- Adjusted margin top -->
 
 </androidx.appcompat.widget.Toolbar>
 
-    </LinearLayout>
+
+    </RelativeLayout>
