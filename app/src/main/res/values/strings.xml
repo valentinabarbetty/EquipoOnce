@@ -2,4 +2,7 @@
     <string name="app_name">DogAppUV</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Fragment login</string>
+    <string name="ir_administrador_citas">Ir al Administrador de citas</string>
+    <string name="dogapp">DogApp</string>
+
 </resources>
