@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.databinding.DataBindingUtil
 import com.uv.dogappuv.R
 import com.uv.dogappuv.databinding.FragmentNuevaCitaBinding
 import com.uv.dogappuv.view.model.Citas
@@ -15,7 +14,12 @@ import com.uv.dogappuv.view.viewmodel.CitasViewModel
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.uv.dogappuv.view.model.BreedsList
+import com.uv.dogappuv.view.viewmodel.BreedsViewModel
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,6 +36,13 @@ class NuevaCitaFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private val citasViewModel: CitasViewModel by viewModels()
+    private lateinit var binding: FragmentNuevaCitaBinding
+    private val breedsViewModel: BreedsViewModel by viewModels {
+        ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
+    }
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,12 +57,39 @@ class NuevaCitaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentNuevaCitaBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_nueva_cita, container, false)
 
+        binding = FragmentNuevaCitaBinding.inflate(inflater)
+        binding.lifecycleOwner = this
         setupSpinner(binding)
         controladores(binding)
+        setupToolbar()
+        observerViewModel()
+       /* breedsViewModel.getBreeds()*/
+
+       /* get_breeds()
+*/
 
         return binding.root
+    }
+
+    private fun observerViewModel() {
+        observerListBreeds()
+    }
+    private fun observerListBreeds(){
+        breedsViewModel.get_Breeds()
+        breedsViewModel.listBreeds.observe(viewLifecycleOwner){
+            lista ->
+            val breed = lista[2]
+            binding.etRaza.setText(breed.toString())
+
+        }
+    }
+
+    private fun setupToolbar(){
+        binding.contentToolbar.toolbar.setNavigationOnClickListener { onBackPressed() }
+    }
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_go_back_home)
     }
 
     private fun setupSpinner(binding: FragmentNuevaCitaBinding) {
@@ -80,14 +118,7 @@ class NuevaCitaFragment : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NuevaCitaFragment.
-         */
+
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
@@ -105,6 +136,7 @@ class NuevaCitaFragment : Fragment() {
             saveCita(binding)
         }
     }
+
     private fun saveCita(binding: FragmentNuevaCitaBinding) {
         val nombreMascota = binding.etNombreMascota.text.toString()
         val raza = binding.etRaza.text.toString()
@@ -124,6 +156,11 @@ class NuevaCitaFragment : Fragment() {
         Toast.makeText(context, "Cita creada !!", Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
     }
+
+
+
+
+
 }
 
 
