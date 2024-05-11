@@ -1,6 +1,8 @@
 package com.uv.dogappuv.view.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +14,16 @@ import com.uv.dogappuv.databinding.FragmentNuevaCitaBinding
 import com.uv.dogappuv.view.model.Citas
 import com.uv.dogappuv.view.viewmodel.CitasViewModel
 import android.util.Log
-import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.uv.dogappuv.view.model.BreedsList
 import com.uv.dogappuv.view.viewmodel.BreedsViewModel
-
+import dagger.hilt.android.AndroidEntryPoint
+import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,15 +35,16 @@ private const val ARG_PARAM2 = "param2"
  * Use the [NuevaCitaFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class NuevaCitaFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private val citasViewModel: CitasViewModel by viewModels()
+    private val citasViewModel by viewModels<CitasViewModel>()
+
+
     private lateinit var binding: FragmentNuevaCitaBinding
-    private val breedsViewModel: BreedsViewModel by viewModels {
-        ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-    }
+
 
 
 
@@ -67,22 +72,23 @@ class NuevaCitaFragment : Fragment() {
        /* breedsViewModel.getBreeds()*/
 
        /* get_breeds()
-*/
+*/      binding.btnSubmit.isEnabled = false
 
         return binding.root
     }
+
 
     private fun observerViewModel() {
         observerListBreeds()
     }
     private fun observerListBreeds(){
-        breedsViewModel.get_Breeds()
-        breedsViewModel.listBreeds.observe(viewLifecycleOwner){
+    /*    citasViewModel.getBreeds()
+        citasViewModel.listBreeds.observe(viewLifecycleOwner){
             lista ->
             val breed = lista[2]
             binding.etRaza.setText(breed.toString())
 
-        }
+        }*/
     }
 
     private fun setupToolbar(){
@@ -93,29 +99,14 @@ class NuevaCitaFragment : Fragment() {
     }
 
     private fun setupSpinner(binding: FragmentNuevaCitaBinding) {
-        // Define an array of items for the spinner, including "Síntomas" as the default item
         val items = arrayOf("Síntomas", "Solo duerme", "No come", "Fractura extremidad", "Tiene pulgas", "Tiene garrapatas", "Bota demasiado pelo")
-
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
         binding.spinner.adapter = adapter
 
-        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parentView: AdapterView<*>, selectedItemView: View?, position: Int, id: Long) {
-                // Handle the selection event here
-                if (position != 0) {
-                    val selectedItem = parentView.getItemAtPosition(position) as String
-                    // Do something with the selected item
-                }
-            }
 
-            override fun onNothingSelected(parentView: AdapterView<*>) {
-                // Do nothing when nothing is selected
-            }
-        }
     }
+
 
     companion object {
 
@@ -131,11 +122,28 @@ class NuevaCitaFragment : Fragment() {
     }
 
     private fun controladores(binding: FragmentNuevaCitaBinding) {
-//        validarDatos()
-        binding.btnSubmit.setOnClickListener {
-            saveCita(binding)
+        validarDatos()
+
+
+        // Initially disable the submit button
+        if (binding.btnSubmit.isEnabled) {
+            binding.btnSubmit.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.darker_gray))
+        } else {
+            binding.btnSubmit.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
         }
+        binding.btnSubmit.setOnClickListener {
+            val selectedSintoma = binding.spinner.selectedItem.toString()
+            if (selectedSintoma == "Síntomas") {
+                // Muestra el mensaje emergente si "Síntomas" está seleccionado
+                Toast.makeText(requireContext(), "Selecciona un síntoma", Toast.LENGTH_SHORT).show()
+            } else {
+                // Llama a la función para guardar la cita si se ha seleccionado otro síntoma
+                saveCita(binding)
+            }
+        }
+
     }
+
 
     private fun saveCita(binding: FragmentNuevaCitaBinding) {
         val nombreMascota = binding.etNombreMascota.text.toString()
@@ -156,7 +164,22 @@ class NuevaCitaFragment : Fragment() {
         Toast.makeText(context, "Cita creada !!", Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
     }
+    private fun validarDatos() {
+        val listEditText = listOf(binding.etRaza, binding.etPropietario, binding.etTelefono, binding.etNombreMascota)
 
+        for (editText in listEditText) {
+            editText.addTextChangedListener {
+                val isListFull = listEditText.all {
+                    it.text?.isNotEmpty() ?: false // si toda la lista no está vacía
+                }
+                binding.btnSubmit.isEnabled = isListFull
+                // Si todos los campos están llenos, cambia el color del texto a blanco
+                if (isListFull) {
+                    binding.btnSubmit.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.white))
+                }
+            }
+        }
+    }
 
 
 

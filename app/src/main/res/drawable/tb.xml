@@ -1,11 +1,13 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Fondo gris sólido -->
-    <item android:top="0dp"> <!-- Adjust top padding to control how much of the rectangle is visible -->
+    <item android:top="0dp">
         <shape android:shape="rectangle">
             <solid android:color="@color/toolbar" />
-            <corners android:radius="70dp" />
-            <size android:height="100dp" /> <!-- Adjust height to control the visible portion -->
+            <corners android:topLeftRadius="0dp"
+                android:topRightRadius="0dp"
+                android:bottomLeftRadius="80dp"
+                android:bottomRightRadius="80dp"/>
         </shape>
     </item>
 

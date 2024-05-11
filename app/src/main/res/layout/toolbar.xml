@@ -5,38 +5,26 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="100dp"
         android:background="@drawable/tb"
-        android:layout_marginTop="-80dp"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
-        app:navigationIcon="@drawable/back_36"
-  >
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:navigationIcon="@drawable/back_36">
 
-    <!-- Icon on the left -->
-        <ImageView
-            android:id="@+id/backButton"
+        <!-- Title centered -->
+        <TextView
+            android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/back_36"
-            android:padding="30dp"
-            android:clickable="true"
-            android:layout_marginTop="90dp"
-            />
+            android:text="Nueva Cita"
+            android:textSize="30sp"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="40dp"/> <!-- Adjusted margin top -->
 
-    <!-- Title centered -->
-    <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nueva Cita"
-        android:textSize="30sp"
-        android:paddingLeft="5dp"
-        android:textColor="@android:color/white"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="110dp"/> <!-- Adjusted margin top -->
+    </androidx.appcompat.widget.Toolbar>
 
-</androidx.appcompat.widget.Toolbar>
-
-
-    </layout>
+</layout>

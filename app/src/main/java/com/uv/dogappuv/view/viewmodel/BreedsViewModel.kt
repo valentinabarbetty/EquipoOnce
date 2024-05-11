@@ -9,7 +9,8 @@ import com.uv.dogappuv.view.model.BreedsList
 import com.uv.dogappuv.view.repository.CitasRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
-
+import dagger.hilt.android.lifecycle.HiltViewModel
+@HiltViewModel
 class BreedsViewModel(application: Application) : AndroidViewModel(application) {
     val context = getApplication<Application>()
     private val citasRepository = CitasRepository(context)
@@ -18,7 +19,7 @@ class BreedsViewModel(application: Application) : AndroidViewModel(application) 
     private val _listBreeds = MutableLiveData<MutableList<BreedsList>>()
     val listBreeds: LiveData<MutableList<BreedsList>> = _listBreeds
 
-  fun get_Breeds(){
+  fun getBreeds(){
       viewModelScope.launch {
           /*_progressState.value = true*/
           try {
