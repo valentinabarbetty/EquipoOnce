@@ -10,6 +10,12 @@ import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.uv.dogappuv.R
 import com.uv.dogappuv.databinding.FragmentNuevaCitaBinding
+import com.uv.dogappuv.view.model.Citas
+import com.uv.dogappuv.view.viewmodel.CitasViewModel
+import android.util.Log
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +31,7 @@ class NuevaCitaFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val citasViewModel: CitasViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +49,7 @@ class NuevaCitaFragment : Fragment() {
         val binding: FragmentNuevaCitaBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_nueva_cita, container, false)
 
         setupSpinner(binding)
+        controladores(binding)
 
         return binding.root
     }
@@ -90,4 +98,32 @@ class NuevaCitaFragment : Fragment() {
                 }
             }
     }
+
+    private fun controladores(binding: FragmentNuevaCitaBinding) {
+//        validarDatos()
+        binding.btnSubmit.setOnClickListener {
+            saveCita(binding)
+        }
+    }
+    private fun saveCita(binding: FragmentNuevaCitaBinding) {
+        val nombreMascota = binding.etNombreMascota.text.toString()
+        val raza = binding.etRaza.text.toString()
+        val propietario = binding.etPropietario.text.toString()
+        val telefono = binding.etTelefono.text.toString()
+        val sintoma = binding.spinner.selectedItem.toString()
+        val cita = Citas(
+            nombreMascota = nombreMascota,
+            nombrePropietario = propietario,
+            razaMascota = raza,
+            sintoma = sintoma,
+            telefonoPropietario = telefono
+        )
+        Log.d("test", "Antes")
+        citasViewModel.saveCita(cita)
+        Log.d("test", cita.toString())
+        Toast.makeText(context, "Cita creada !!", Toast.LENGTH_SHORT).show()
+        findNavController().popBackStack()
+    }
 }
+
+

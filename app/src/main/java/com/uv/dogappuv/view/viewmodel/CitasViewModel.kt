@@ -1,6 +1,7 @@
 package com.uv.dogappuv.view.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -28,6 +29,7 @@ class CitasViewModel(application: Application) : AndroidViewModel(application) {
                 citasRepository.saveCita(citas)
                 _progresState.value = false
             } catch (e: Exception) {
+                Log.d("test", e.toString())
                 _progresState.value = false
             }
         }
