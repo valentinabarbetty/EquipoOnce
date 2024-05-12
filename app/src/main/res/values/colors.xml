@@ -7,4 +7,10 @@
     <color name="colorFavorite">#B83232</color>
     <color name="toolbar">#1e282d</color>
     <color name="rosa">#F05861</color>
+
+    <color name="backgroudColorBtn">#FF4081</color>
+
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="background_color_btn">#F05861</color>
+
 </resources>
