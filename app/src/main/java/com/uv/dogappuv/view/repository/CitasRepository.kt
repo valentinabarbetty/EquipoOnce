@@ -9,6 +9,7 @@ import kotlinx.coroutines.withContext
 
 class CitasRepository(val context: Context) {
     private var citasDao: CitasDao = CitasDB.getDatabase(context).citasDao()
+    //private var apiService: ApiService = ApiUtils.getApiService()
     suspend fun saveCita(citas: Citas) {
         withContext(Dispatchers.IO) {
             citasDao.saveCita(citas)
@@ -32,4 +33,17 @@ class CitasRepository(val context: Context) {
             citasDao.updateCita(citas)
         }
     }
+
+    /*suspend fun getProducts(): MutableList<Product> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getProducts()
+                response
+            } catch (e: Exception) {
+
+                e.printStackTrace()
+                mutableListOf()
+            }
+        }
+    }*/
 }

@@ -1,4 +1,4 @@
-package com.uv.dogappuv.view.fragments
+package com.uv.dogappuv.view.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

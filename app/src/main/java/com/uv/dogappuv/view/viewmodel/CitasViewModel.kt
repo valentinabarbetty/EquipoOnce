@@ -13,7 +13,6 @@ class CitasViewModel(application: Application) : AndroidViewModel(application) {
     val context = getApplication<Application>()
     private val citasRepository = CitasRepository(context)
 
-
     private val _listCitas = MutableLiveData<MutableList<Citas>>()
     val listCitas: LiveData<MutableList<Citas>> get() = _listCitas
 
