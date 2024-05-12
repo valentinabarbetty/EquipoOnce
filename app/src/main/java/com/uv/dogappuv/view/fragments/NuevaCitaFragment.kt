@@ -153,10 +153,10 @@ class NuevaCitaFragment : Fragment() {
         val sintoma = binding.spinner.selectedItem.toString()
         val cita = Citas(
             nombreMascota = nombreMascota,
-            nombrePropietario = propietario,
             razaMascota = raza,
+            nombrePropietario = propietario,
+            telefonoPropietario = telefono,
             sintoma = sintoma,
-            telefonoPropietario = telefono
         )
         Log.d("test", "Antes")
         citasViewModel.saveCita(cita)
