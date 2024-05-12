@@ -27,5 +27,8 @@
         android:name="com.uv.dogappuv.view.view.fragment.NuevaCitaFragment"
         android:label="NuevaCita"
         tools:layout="@layout/fragment_nueva_cita">
+        <action
+            android:id="@+id/action_go_back_home"
+            app:destination="@id/fragment_admin_citas" />
     </fragment>
 </navigation>

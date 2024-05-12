@@ -3,13 +3,16 @@ package com.uv.dogappuv.view.repository
 import android.content.Context
 import com.uv.dogappuv.view.data.CitasDB
 import com.uv.dogappuv.view.data.CitasDao
+import com.uv.dogappuv.view.model.BreedsList
 import com.uv.dogappuv.view.model.Citas
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import com.uv.dogappuv.view.webService.ApiService
+import com.uv.dogappuv.view.webService.ApiUtils
 
 class CitasRepository(val context: Context) {
     private var citasDao: CitasDao = CitasDB.getDatabase(context).citasDao()
-    //private var apiService: ApiService = ApiUtils.getApiService()
+    private var apiService: ApiService = ApiUtils.getApiService()
     suspend fun saveCita(citas: Citas) {
         withContext(Dispatchers.IO) {
             citasDao.saveCita(citas)
@@ -34,16 +37,15 @@ class CitasRepository(val context: Context) {
         }
     }
 
-    /*suspend fun getProducts(): MutableList<Product> {
+    suspend fun getBreeds(): MutableList<BreedsList>? {
         return withContext(Dispatchers.IO) {
             try {
-                val response = apiService.getProducts()
+                val response = apiService.getDogsBreeds()
                 response
             } catch (e: Exception) {
-
                 e.printStackTrace()
                 mutableListOf()
             }
         }
-    }*/
+    }
 }
