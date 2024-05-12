@@ -1,6 +1,7 @@
 package com.uv.dogappuv.view.repository
 
 import android.content.Context
+import android.util.Log
 import com.uv.dogappuv.view.data.CitasDB
 import com.uv.dogappuv.view.data.CitasDao
 import com.uv.dogappuv.view.model.BreedsList
@@ -41,6 +42,7 @@ class CitasRepository(val context: Context) {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getDogsBreeds()
+                Log.d("base de datos respose: ", response.toString())
                 response
             } catch (e: Exception) {
                 e.printStackTrace()
