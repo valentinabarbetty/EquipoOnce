@@ -1,4 +1,4 @@
-package com.uv.dogappuv.view.fragments
+package com.uv.dogappuv.view.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.uv.dogappuv.databinding.FragmentLoginBinding
 import com.uv.dogappuv.R
-import java.util.Calendar
 
 
 class LoginFragment : Fragment() {
@@ -28,10 +27,12 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-       // navigationFragmentAdmin()
+        navigationFragmentAdmin()
     }
-  //  private fun navigationFragmentAdmin(){
-  //      binding.btnFragmentAdmin.setOnClickListener {
-  //          findNavController().navigate(R.id.fragment_admin_citas)
-   //     }
+
+    private fun navigationFragmentAdmin() {
+        binding.btnFragmentAdmin.setOnClickListener {
+            findNavController().navigate(R.id.fragment_admin_citas)
+        }
     }
+}
