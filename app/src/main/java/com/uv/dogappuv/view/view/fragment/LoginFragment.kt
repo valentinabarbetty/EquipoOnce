@@ -29,7 +29,8 @@ class LoginFragment : Fragment() {
 
         navigationFragmentAdmin()
     }
-    private fun navigationFragmentAdmin(){
+
+    private fun navigationFragmentAdmin() {
         binding.btnFragmentAdmin.setOnClickListener {
             findNavController().navigate(R.id.fragment_admin_citas)
         }

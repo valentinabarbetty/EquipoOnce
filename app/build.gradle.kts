@@ -47,6 +47,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.10.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.airbnb.android:lottie:6.4.0")
 
     //testing
     testImplementation("junit:junit:4.13.2")
@@ -96,5 +97,6 @@ dependencies {
 
     //Circular image view
     implementation ("com.mikhaellopez:circularimageview:4.3.1")
+
 
 }

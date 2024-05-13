@@ -13,4 +13,5 @@
     <color name="backgroundColor">#FFFFFF</color>
     <color name="background_color_btn">#F05861</color>
 
+    <color name="grisOscuro">#FF333333</color>
 </resources>
