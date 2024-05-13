@@ -28,11 +28,10 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navigationFragmentAdmin()
+       // navigationFragmentAdmin()
     }
-    private fun navigationFragmentAdmin(){
-        binding.btnFragmentAdmin.setOnClickListener {
-            findNavController().navigate(R.id.fragment_admin_citas)
-        }
+  //  private fun navigationFragmentAdmin(){
+  //      binding.btnFragmentAdmin.setOnClickListener {
+  //          findNavController().navigate(R.id.fragment_admin_citas)
+   //     }
     }
-}

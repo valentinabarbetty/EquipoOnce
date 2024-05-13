@@ -33,7 +33,7 @@
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/SimplyRounded"
+            android:fontFamily="@font/simplyrounded"
             android:text="@string/dogapp"
             android:textColor="@android:color/white"
             android:textSize="60sp"
