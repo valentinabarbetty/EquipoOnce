@@ -98,5 +98,8 @@ dependencies {
     //Circular image view
     implementation ("com.mikhaellopez:circularimageview:4.3.1")
 
+    //Huella
+    implementation ("androidx.biometric:biometric-ktx:1.2.0-alpha05")
+
 
 }
