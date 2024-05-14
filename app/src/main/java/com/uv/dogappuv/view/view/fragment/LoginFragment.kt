@@ -34,8 +34,9 @@ class LoginFragment : Fragment() {
         animationView = view.findViewById(R.id.animation_view)
 
         // Show biometric prompt when animation view is clicked
+        findNavController().navigate(R.id.fragment_admin_citas)
         animationView.setOnClickListener {
-            showBiometricPrompt()
+//            showBiometricPrompt()
             Log.d("LoginFragment", "Animation clicked")
         }
 
