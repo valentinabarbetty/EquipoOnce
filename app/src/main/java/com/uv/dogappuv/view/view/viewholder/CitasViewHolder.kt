@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.uv.dogappuv.R
 import com.uv.dogappuv.databinding.ItemMascotaBinding
 import com.uv.dogappuv.view.model.Citas
 import com.uv.dogappuv.view.utils.Constants
@@ -28,7 +29,15 @@ class CitasViewHolder(binding: ItemMascotaBinding, navController: NavController)
     }
 
     fun setItemCita(cita: Citas) {
-        getImagenPerro(cita.razaMascota)
+        var image = ""
+
+        getImagenPerro(cita.razaMascota) { imageUrl ->
+            imageUrl?.let {
+                // Carga la imagen utilizando la URL directamente
+                Glide.with(itemView.context).load(it).into(bindingItem.civFotoPerro)
+                image = imageUrl
+            }
+        }
 
         bindingItem.tvNombreMascota.text = cita.nombreMascota
         bindingItem.tvDescripcion.text = "${cita.sintoma}"
@@ -37,34 +46,33 @@ class CitasViewHolder(binding: ItemMascotaBinding, navController: NavController)
         bindingItem.cvMascosta.setOnClickListener {
             val bundle = Bundle()
             bundle.putSerializable("clave", cita)
-            //navController.navigate(R.id.action_homeInventoryFragment_to_itemDetailsFragment, bundle)
+            bundle.putSerializable("imagen", image)
+            navController.navigate(
+                R.id.action_fragment_admin_citas_to_fragment_detalle_cita, bundle
+            )
         }
     }
 
-    fun getImagenPerro(razaMascota: String) {
-        apiService.getImagenPerro(razaMascota)
-            .enqueue(object : Callback<ImageResponse> {
-                override fun onResponse(
-                    call: Call<ImageResponse>,
-                    response: Response<ImageResponse>
-                ) {
-                    if (response.body()?.status.toString() == "success") {
-                        val imageUrl = response.body()?.message.toString()
-                        imageUrl?.let {
-                            // Carga la imagen utilizando la URL directamente
-                            Glide.with(itemView.context).load(it).into(bindingItem.civFotoPerro)
-                        }
-                    } else {
-                        Log.d("test imagen: ", "Respuesta del servidor negativa:" + response.toString())
-                    }
+    fun getImagenPerro(razaMascota: String, callback: (String?) -> Unit) {
+        apiService.getImagenPerro(razaMascota).enqueue(object : Callback<ImageResponse> {
+            override fun onResponse(
+                call: Call<ImageResponse>, response: Response<ImageResponse>
+            ) {
+                if (response.body()?.status.toString() == "success") {
+                    val imageUrl = response.body()?.message.toString()
+                    callback(imageUrl)
+                } else {
+                    Log.d(
+                        "test imagen: ", "Respuesta del servidor negativa:$response"
+                    )
+                    callback(null)
                 }
+            }
 
-                override fun onFailure(
-                    call: Call<ImageResponse>,
-                    t: Throwable
-                ) {
-                    Log.e("test Error API", "El consumo de la aplicación ha fallado", t)
-                }
-            })
+            override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
+                Log.e("test Error API", "El consumo de la aplicación ha fallado", t)
+                callback(null)
+            }
+        })
     }
 }

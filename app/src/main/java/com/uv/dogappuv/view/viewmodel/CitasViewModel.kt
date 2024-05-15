@@ -30,7 +30,6 @@ class CitasViewModel(application: Application) : AndroidViewModel(application) {
                 citasRepository.saveCita(citas)
                 _progresState.value = false
             } catch (e: Exception) {
-                Log.d("test", e.toString())
                 _progresState.value = false
             }
         }

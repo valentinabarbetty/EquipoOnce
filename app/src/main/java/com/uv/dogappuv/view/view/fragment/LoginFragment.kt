@@ -36,7 +36,6 @@ class LoginFragment : Fragment() {
         // Show biometric prompt when animation view is clicked
         animationView.setOnClickListener {
             showBiometricPrompt()
-            Log.d("LoginFragment", "Animation clicked")
         }
 
         //view.findViewById<LottieAnimationView>(R.id.animation_view).setOnClickListener {

@@ -64,9 +64,7 @@ class NuevaCitaFragment : Fragment() {
 
     private fun observerListBreeds() {
         citasViewModel.getBreeds()
-        Log.d("Base de datos view: ", citasViewModel.getBreeds().toString())
         citasViewModel.listBreeds.observe(viewLifecycleOwner) { lista ->
-            Log.d("base de datos", lista.toString())
             val breed = lista[2]
             binding.etRaza.setText(breed.toString())
 
@@ -159,9 +157,7 @@ class NuevaCitaFragment : Fragment() {
             telefonoPropietario = telefono,
             sintoma = sintoma,
         )
-        Log.d("test", "Antes")
         citasViewModel.saveCita(cita)
-        Log.d("test", cita.toString())
         Toast.makeText(context, "Cita creada !!", Toast.LENGTH_SHORT).show()
         findNavController().popBackStack()
     }

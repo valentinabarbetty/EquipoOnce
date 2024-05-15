@@ -5,56 +5,65 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.uv.dogappuv.R
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.uv.dogappuv.databinding.FragmentDetalleCitaBinding
+import com.uv.dogappuv.view.model.Citas
+import com.uv.dogappuv.view.viewmodel.CitasViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetalleCitaFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetalleCitaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentDetalleCitaBinding
+    private val citasViewModel: CitasViewModel by viewModels()
+    private lateinit var receivedCita: Citas
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle_cita, container, false)
+        binding = FragmentDetalleCitaBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetalleCitaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetalleCitaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataCita()
+        controladores()
     }
+
+    private fun controladores() {
+        binding.btnDeleteCita.setOnClickListener {
+            deleteCita()
+        }
+
+        binding.btnEditCita.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("dataCita", receivedCita)
+            val detalleCitaFragment = DetalleCitaFragment()
+            detalleCitaFragment.arguments = bundle
+            //findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
+        }
+    }
+
+    private fun dataCita() {
+        val receivedBundle = arguments
+        receivedCita = receivedBundle?.getSerializable("clave") as Citas
+        val image = receivedBundle?.getSerializable("imagen")
+        binding.ctDetalle.tvTitulo.text = "${receivedCita.nombreMascota}"
+        binding.tvRaza.text = "${receivedCita.razaMascota}"
+        binding.tvPropietario.text = "${receivedCita.nombrePropietario}"
+        binding.tvTelefono.text = "${receivedCita.telefonoPropietario}"
+        binding.tvId.text = "${receivedCita.id}"
+        binding.tvSintoma.text = "${receivedCita.sintoma}"
+        Glide.with(this).load(image).into(binding.ivFoto)
+
+    }
+
+    private fun deleteCita() {
+        citasViewModel.deleteCita(receivedCita)
+        citasViewModel.getListCitas()
+        findNavController().popBackStack()
+    }
+
 }
