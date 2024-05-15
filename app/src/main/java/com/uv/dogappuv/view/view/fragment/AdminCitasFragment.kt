@@ -1,6 +1,7 @@
 package com.uv.dogappuv.view.view.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.uv.dogappuv.R
 import com.uv.dogappuv.databinding.FragmentAdminCitasBinding
 import com.uv.dogappuv.view.view.adapter.CitasAdapter
 import com.uv.dogappuv.view.viewmodel.CitasViewModel
-
 
 class AdminCitasFragment : Fragment() {
     private lateinit var binding: FragmentAdminCitasBinding
@@ -46,7 +46,6 @@ class AdminCitasFragment : Fragment() {
     }
 
     private fun observerListCitas() {
-
         citasViewModel.getListCitas()
         citasViewModel.listCitas.observe(viewLifecycleOwner) { listCitas ->
             val recycler = binding.recyclerview
@@ -56,7 +55,6 @@ class AdminCitasFragment : Fragment() {
             recycler.adapter = adapter
             adapter.notifyDataSetChanged()
         }
-
     }
 
     private fun observerProgress() {
