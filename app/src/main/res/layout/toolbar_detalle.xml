@@ -4,13 +4,12 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="359dp"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/tb"
-        app:buttonGravity="center_vertical"
         app:navigationIcon="@drawable/back_36">
 
         <!-- Title centered -->
@@ -24,7 +23,7 @@
             android:gravity="center"
             android:text="Cory"
             android:textColor="@android:color/white"
-            android:textSize="30sp" />
+            android:textSize="30sp" /> <!-- Adjusted margin top -->
 
     </androidx.appcompat.widget.Toolbar>
 
