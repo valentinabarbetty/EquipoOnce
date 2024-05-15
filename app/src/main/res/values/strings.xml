@@ -4,6 +4,7 @@
     <string name="hello_blank_fragment">Fragment login</string>
     <string name="tituloInventario">Inventario</string>
     <string name="textocitas">Administrador  de Citas</string>
+    <string name="NuevaCita" >Nueva Cita</string>
     <string name="DogApp">DogApp</string>
 
 </resources>

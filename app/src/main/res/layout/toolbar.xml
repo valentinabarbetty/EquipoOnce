@@ -4,12 +4,12 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+        android:layout_width="359dp"
         android:layout_height="100dp"
-        android:background="@drawable/tb"
-        android:layout_marginTop="0dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/tb"
         app:navigationIcon="@drawable/back_36">
 
         <!-- Title centered -->
@@ -17,13 +17,13 @@
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nueva Cita"
-            android:textSize="30sp"
-            android:textColor="@android:color/white"
-            android:gravity="center"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
-            android:layout_marginBottom="40dp"/> <!-- Adjusted margin top -->
+            android:layout_marginBottom="40dp"
+            android:gravity="center"
+            android:text="Nueva Cita"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" /> <!-- Adjusted margin top -->
 
     </androidx.appcompat.widget.Toolbar>
 
