@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.EditarFragment">
+
+        <include
+            android:id="@+id/contentToolbar"
+            layout="@layout/toolbar" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputNombreMascota"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginVertical="150dp"
+            android:hint="Nombre de la mascota"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombreMascota"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:maxLength="15" /> <!-- Set the maximum length to 15 characters -->
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputRaza"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginVertical="30dp"
+            android:hint="Raza"
+            app:layout_constraintTop_toBottomOf="@id/inputNombreMascota"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etRaza"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputPropietario"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginVertical="30dp"
+            android:hint="Nombre del propietario"
+            app:layout_constraintTop_toBottomOf="@id/inputRaza"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPropietario"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="text"
+                android:maxLength="30" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputTelefono"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginVertical="30dp"
+            android:hint="Teléfono"
+            app:layout_constraintTop_toBottomOf="@id/inputPropietario"
+            tools:ignore="MissingConstraints">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTelefono"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="number"
+                android:maxLength="10" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:backgroundTint="@color/rosa"
+            android:drawableLeft="@drawable/edit_24"
+            android:drawablePadding="8dp"
+            android:text="Editar Cita"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/inputTelefono"
+            app:layout_constraintStart_toStartOf="@id/inputTelefono"
+            app:layout_constraintTop_toBottomOf="@id/inputTelefono" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

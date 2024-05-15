@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.uv.dogappuv.R
 import com.uv.dogappuv.databinding.FragmentDetalleCitaBinding
 import com.uv.dogappuv.view.model.Citas
 import com.uv.dogappuv.view.viewmodel.CitasViewModel
@@ -42,8 +43,10 @@ class DetalleCitaFragment : Fragment() {
             bundle.putSerializable("dataCita", receivedCita)
             val detalleCitaFragment = DetalleCitaFragment()
             detalleCitaFragment.arguments = bundle
-            //findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
+            findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
         }
+
+
     }
 
     private fun dataCita() {
