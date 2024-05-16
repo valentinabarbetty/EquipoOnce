@@ -50,10 +50,13 @@
         android:id="@+id/fragment_edit_citas"
         android:name="com.uv.dogappuv.view.view.fragment.EditarFragment"
         android:label="EditarCita"
-        tools:layout="@layout/fragment_detalle_cita">
+        tools:layout="@layout/fragment_editar">
         <action
             android:id="@+id/action_itemEditFragment_to_homeFragment"
             app:destination="@id/fragment_admin_citas" />
+        <action
+            android:id="@+id/action_itemEditFragment_to_detalleCita"
+            app:destination="@id/fragment_detalle_cita" />
 
     </fragment>
 </navigation>

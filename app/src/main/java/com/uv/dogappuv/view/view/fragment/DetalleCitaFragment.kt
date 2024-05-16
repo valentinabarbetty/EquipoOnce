@@ -24,6 +24,7 @@ class DetalleCitaFragment : Fragment() {
     ): View? {
         binding = FragmentDetalleCitaBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        setupToolbar()
         return binding.root
     }
 
@@ -67,6 +68,13 @@ class DetalleCitaFragment : Fragment() {
         citasViewModel.deleteCita(receivedCita)
         citasViewModel.getListCitas()
         findNavController().popBackStack()
+    }
+    private fun setupToolbar() {
+        binding.ctDetalle.tbDetalle.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_fragment_detalle_cita_to_fragment_admin_citas)
     }
 
 }

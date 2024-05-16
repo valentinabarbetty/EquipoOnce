@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.EditarFragment">
 
         <include
-            android:id="@+id/contentToolbar"
-            layout="@layout/toolbar" />
+            android:id="@+id/contentToolbar_editar"
+            layout="@layout/toolbar_edit" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputNombreMascota"

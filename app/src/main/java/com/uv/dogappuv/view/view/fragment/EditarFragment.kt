@@ -32,8 +32,8 @@ class EditarFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var binding: FragmentEditarBinding
     private val citasViewModel: CitasViewModel by viewModels()
+    private lateinit var binding: FragmentEditarBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -49,13 +49,13 @@ class EditarFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentEditarBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        return binding.root
-        dataDog()
-        controladores(binding)
-
+        setupToolbar() // Llama a setupToolbar antes de devolver la vista
+        dataDog() // Llama a dataDog antes de devolver la vista
+        controladores(binding) // Llama a controladores antes de devolver la vista
         binding.btnEdit.isEnabled = false
-       // return inflater.inflate(R.layout.fragment_editar, container, false)
+        return binding.root // Devuelve la vista después de realizar las configuraciones necesarias
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataDog()
@@ -152,6 +152,15 @@ class EditarFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun setupToolbar() {
+        binding.contentToolbarEditar.toolbarEdit.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    private fun onBackPressed() {
+        // Navegar de regreso a la pantalla de detalle de la cita
+        findNavController().navigateUp()
     }
 
 }
