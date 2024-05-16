@@ -42,7 +42,6 @@ class CitasRepository(val context: Context) {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getDogsBreeds()
-                Log.d("base de datos respose: ", response.toString())
                 response
             } catch (e: Exception) {
                 e.printStackTrace()

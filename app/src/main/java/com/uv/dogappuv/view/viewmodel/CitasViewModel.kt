@@ -30,7 +30,6 @@ class CitasViewModel(application: Application) : AndroidViewModel(application) {
                 citasRepository.saveCita(citas)
                 _progresState.value = false
             } catch (e: Exception) {
-                Log.d("test", e.toString())
                 _progresState.value = false
             }
         }
@@ -74,21 +73,19 @@ class CitasViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-
-
-
     private val _listBreeds = MutableLiveData<MutableList<BreedsList>>()
     val listBreeds: LiveData<MutableList<BreedsList>> = _listBreeds
 
-    fun getBreeds(){
+    fun getBreeds() {
         viewModelScope.launch {
             /*_progressState.value = true*/
             try {
                 _listBreeds.value = citasRepository.getBreeds()
                 /*_progressState.value = false*/
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 /*progressState.value = false*/
-            }}
+            }
+        }
     }
 }
 
