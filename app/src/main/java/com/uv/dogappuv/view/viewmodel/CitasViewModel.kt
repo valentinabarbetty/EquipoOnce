@@ -76,16 +76,16 @@ class CitasViewModel(application: Application) : AndroidViewModel(application) {
     private val _listBreeds = MutableLiveData<MutableList<BreedsList>>()
     val listBreeds: LiveData<MutableList<BreedsList>> = _listBreeds
 
-    fun getBreeds() {
-        viewModelScope.launch {
-            /*_progressState.value = true*/
-            try {
-                _listBreeds.value = citasRepository.getBreeds()
-                /*_progressState.value = false*/
-            } catch (e: Exception) {
-                /*progressState.value = false*/
-            }
-        }
-    }
+//    fun getBreeds() {
+//        viewModelScope.launch {
+//            /*_progressState.value = true*/
+//            try {
+//                _listBreeds.value = citasRepository.getBreeds()
+//                /*_progressState.value = false*/
+//            } catch (e: Exception) {
+//                /*progressState.value = false*/
+//            }
+//        }
+//    }
 }
 
