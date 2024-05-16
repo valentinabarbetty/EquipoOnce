@@ -85,7 +85,8 @@ class NuevaCitaFragment : Fragment() {
                                 breedsList.addAll(list)
                             }
                             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedsList)
-                            // binding.etRaza.setAdapter(adapter)
+                             binding.etRaza.setAdapter(adapter)
+
                             logBreedsList(breedsList)
                         }
                     }
