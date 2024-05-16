@@ -38,15 +38,15 @@ class CitasRepository(val context: Context) {
         }
     }
 
-    suspend fun getBreeds(): MutableList<BreedsList>? {
-        return withContext(Dispatchers.IO) {
-            try {
-                val response = apiService.getDogsBreeds()
-                response
-            } catch (e: Exception) {
-                e.printStackTrace()
-                mutableListOf()
-            }
-        }
-    }
+//    suspend fun getBreeds(): MutableList<BreedsList>? {
+//        return withContext(Dispatchers.IO) {
+//            try {
+//                val response = apiService.getDogsBreeds()
+//                response
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//                mutableListOf()
+//            }
+//        }
+//    }
 }
