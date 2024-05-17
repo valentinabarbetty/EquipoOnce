@@ -1,4 +1,5 @@
 package com.uv.dogappuv.view.model
+
 import com.google.gson.annotations.SerializedName
 
 data class BreedsList(

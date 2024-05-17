@@ -44,7 +44,10 @@ class DetalleCitaFragment : Fragment() {
             bundle.putSerializable("dataCita", receivedCita)
             val detalleCitaFragment = DetalleCitaFragment()
             detalleCitaFragment.arguments = bundle
-            findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
+            findNavController().navigate(
+                R.id.action_itemDetailsFragment_to_itemEditFragment,
+                bundle
+            )
         }
 
 
@@ -56,8 +59,8 @@ class DetalleCitaFragment : Fragment() {
         val image = receivedBundle?.getSerializable("imagen")
         binding.ctDetalle.tvTitulo.text = "${receivedCita.nombreMascota}"
         binding.tvRaza.text = "${receivedCita.razaMascota}"
-        binding.tvPropietario.text = "${receivedCita.nombrePropietario}"
-        binding.tvTelefono.text = "${receivedCita.telefonoPropietario}"
+        binding.tvPropietario.text = "Propietario: ${receivedCita.nombrePropietario}"
+        binding.tvTelefono.text = "Teléfono: ${receivedCita.telefonoPropietario}"
         binding.tvId.text = "#${receivedCita.id}"
         binding.tvSintoma.text = "${receivedCita.sintoma}"
         Glide.with(this).load(image).into(binding.ivFoto)
@@ -69,6 +72,7 @@ class DetalleCitaFragment : Fragment() {
         citasViewModel.getListCitas()
         findNavController().popBackStack()
     }
+
     private fun setupToolbar() {
         binding.ctDetalle.tbDetalle.setNavigationOnClickListener { onBackPressed() }
     }

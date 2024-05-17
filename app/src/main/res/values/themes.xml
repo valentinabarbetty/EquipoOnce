@@ -6,6 +6,7 @@
     </style>
 
     <style name="Theme.DogAppUV" parent="Base.Theme.DogAppUV" />
+
     <style name="toolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
         <item name="android:colorControlNormal">@color/white</item>
         <item name="titleTextColor">@color/white</item>

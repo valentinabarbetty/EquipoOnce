@@ -36,14 +36,17 @@ class BiometricPromptManager(
                 resultChannel.trySend(BiometricResult.HardwareUnavailable)
                 return
             }
+
             BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> {
                 resultChannel.trySend(BiometricResult.FeatureUnavailable)
                 return
             }
+
             BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> {
                 resultChannel.trySend(BiometricResult.AuthenticationNotSet)
                 return
             }
+
             else -> Unit
         }
 
@@ -70,11 +73,11 @@ class BiometricPromptManager(
     }
 
     sealed interface BiometricResult {
-        data object HardwareUnavailable: BiometricResult
-        data object FeatureUnavailable: BiometricResult
-        data class AuthenticationError(val error: String): BiometricResult
-        data object AuthenticationFailed: BiometricResult
-        data object AuthenticationSuccess: BiometricResult
-        data object AuthenticationNotSet: BiometricResult
+        data object HardwareUnavailable : BiometricResult
+        data object FeatureUnavailable : BiometricResult
+        data class AuthenticationError(val error: String) : BiometricResult
+        data object AuthenticationFailed : BiometricResult
+        data object AuthenticationSuccess : BiometricResult
+        data object AuthenticationNotSet : BiometricResult
     }
 }

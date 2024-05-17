@@ -1,7 +1,5 @@
 package com.uv.dogappuv.view.webService
 
-import com.uv.dogappuv.view.model.BreedsList
-import com.uv.dogappuv.view.utils.Constants
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

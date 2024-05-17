@@ -27,14 +27,12 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.28" />
 
-
-
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewBackground"
             android:layout_width="match_parent"
             android:layout_height="320dp"
-            android:layout_marginTop="220dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="220dp"
             android:layout_marginBottom="16dp"
             app:cardBackgroundColor="@android:color/white"
             app:cardCornerRadius="8dp"
@@ -59,9 +57,9 @@
                     android:layout_marginTop="8dp"
                     android:textSize="25sp"
                     android:textStyle="bold"
-                    app:layout_constraintTop_toBottomOf="@id/midGuideline"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/midGuideline" />
 
                 <TextView
                     android:id="@+id/tvSintoma"
@@ -69,9 +67,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:textSize="20sp"
-                    app:layout_constraintTop_toBottomOf="@id/tvRaza"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/tvRaza" />
 
                 <View
                     android:id="@+id/separator"
@@ -79,31 +77,31 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
                     android:background="@color/rojo"
-                    app:layout_constraintTop_toBottomOf="@id/tvSintoma"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSintoma"
                     app:layout_constraintWidth_percent="0.9" />
 
                 <TextView
                     android:id="@+id/tvPropietario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_margin="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="8dp"
                     android:textSize="15sp"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/separator" />
 
                 <TextView
                     android:id="@+id/tvTelefono"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_margin="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/tvPropietario"
+                    android:layout_marginTop="8dp"
                     android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvPropietario" />
 
                 <TextView
                     android:id="@+id/tvId"
@@ -111,13 +109,16 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/rojo"
                     android:textSize="25sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardViewPicture"
             android:layout_width="229dp"

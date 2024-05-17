@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
         }
 
         //view.findViewById<LottieAnimationView>(R.id.animation_view).setOnClickListener {
-          //  showBiometricPrompt()
+        //  showBiometricPrompt()
         //}
 
 
@@ -65,8 +65,10 @@ class LoginFragment : Fragment() {
             is BiometricPromptManager.BiometricResult.AuthenticationSuccess -> {
                 findNavController().navigate(R.id.fragment_admin_citas)
             }
+
             is BiometricPromptManager.BiometricResult.AuthenticationFailed -> {
             }
+
             is BiometricPromptManager.BiometricResult.AuthenticationError -> {
 
             }
@@ -79,13 +81,11 @@ class LoginFragment : Fragment() {
 }
 
 
-
-
- //   private fun navigationFragmentAdmin() {
-   //     binding.btnFragmentAdmin.setOnClickListener {
-     //       findNavController().navigate(R.id.fragment_admin_citas)
-  //      }
-   // }
+//   private fun navigationFragmentAdmin() {
+//     binding.btnFragmentAdmin.setOnClickListener {
+//       findNavController().navigate(R.id.fragment_admin_citas)
+//      }
+// }
 
 
 

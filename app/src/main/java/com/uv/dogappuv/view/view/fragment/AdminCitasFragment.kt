@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -31,6 +32,16 @@ class AdminCitasFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         controladores();
         observadorViewModel();
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    // Mueve la tarea al fondo
+                    requireActivity().moveTaskToBack(true)
+                }
+            }
+        )
     }
 
     private fun controladores() {

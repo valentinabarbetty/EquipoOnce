@@ -51,7 +51,7 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"/>
+                android:paddingEnd="8dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

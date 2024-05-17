@@ -12,12 +12,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import com.uv.dogappuv.R
-import com.uv.dogappuv.databinding.FragmentDetalleCitaBinding
 import com.uv.dogappuv.databinding.FragmentEditarBinding
 import com.uv.dogappuv.view.model.Citas
 import com.uv.dogappuv.view.viewmodel.CitasViewModel
 import androidx.navigation.fragment.findNavController
-import com.uv.dogappuv.databinding.FragmentNuevaCitaBinding
 import com.uv.dogappuv.view.webService.ApiService
 import com.uv.dogappuv.view.webService.DogBreedsResponse
 import retrofit2.Call
@@ -25,34 +23,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.math.sin
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 private lateinit var receivedCita: Citas
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EditarFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditarFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private val citasViewModel: CitasViewModel by viewModels()
     private lateinit var binding: FragmentEditarBinding
-
+    private var sintoma = ""
 
     private lateinit var apiService: ApiService
     private val breedsList = mutableListOf<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
         val retrofit = Retrofit.Builder()
             .baseUrl("https://dog.ceo/api/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -81,46 +64,28 @@ class EditarFragment : Fragment() {
         fetchBreeds()
         controladores(binding)
     }
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditarFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditarFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
-    private fun dataDog(){
+    private fun dataDog() {
         val receivedBundle = arguments
         receivedCita = receivedBundle?.getSerializable("dataCita") as Citas
         binding.etNombreMascota.setText(receivedCita.nombreMascota)
         binding.etRaza.setText(receivedCita.razaMascota)
-        binding.etPropietario.setText(receivedCita.nombrePropietario.toString())
-        binding.etTelefono.setText(receivedCita.telefonoPropietario.toString())
-
+        binding.etPropietario.setText(receivedCita.nombrePropietario)
+        binding.etTelefono.setText(receivedCita.telefonoPropietario)
+        sintoma = receivedCita.sintoma
     }
 
-    private fun updateCita(binding: FragmentEditarBinding){
+    private fun updateCita(binding: FragmentEditarBinding) {
         val nombreMascota = binding.etNombreMascota.text.toString()
         val raza = binding.etRaza.text.toString()
         val propietario = binding.etPropietario.text.toString()
         val telefono = binding.etTelefono.text.toString()
-        val cita = Citas(receivedCita.id, nombreMascota, raza, propietario, telefono,"" )
+        val cita = Citas(receivedCita.id, nombreMascota, raza, propietario, telefono, sintoma)
         citasViewModel.updateCita(cita)
         findNavController().navigate(R.id.action_itemEditFragment_to_homeFragment)
 
     }
+
     private fun controladores(binding: FragmentEditarBinding) {
         validarDatos()
 
@@ -141,11 +106,10 @@ class EditarFragment : Fragment() {
             )
         }
         binding.btnEdit.setOnClickListener {
-                // Llama a la función para guardar la cita si se ha seleccionado otro síntoma
-                updateCita(binding)
-            }
+            // Llama a la función para guardar la cita si se ha seleccionado otro síntoma
+            updateCita(binding)
         }
-
+    }
 
     private fun validarDatos() {
         val listEditText = listOf(
@@ -173,9 +137,13 @@ class EditarFragment : Fragment() {
             }
         }
     }
+
     private fun fetchBreeds() {
         apiService.getBreedsList().enqueue(object : Callback<DogBreedsResponse> {
-            override fun onResponse(call: Call<DogBreedsResponse>, response: Response<DogBreedsResponse>) {
+            override fun onResponse(
+                call: Call<DogBreedsResponse>,
+                response: Response<DogBreedsResponse>
+            ) {
                 if (response.isSuccessful) {
                     val breedsResponse = response.body()
                     breedsResponse?.let {
@@ -185,14 +153,21 @@ class EditarFragment : Fragment() {
                             breedsMap.values.forEach { list ->
                                 breedsList.addAll(list)
                             }
-                            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedsList)
+                            val adapter = ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_dropdown_item_1line,
+                                breedsList
+                            )
                             binding.etRaza.setAdapter(adapter)
 
                             logBreedsList(breedsList)
                         }
                     }
                 } else {
-                    Log.e("fetchBreeds", "Failed to fetch breeds. Response code: ${response.code()}")
+                    Log.e(
+                        "fetchBreeds",
+                        "Failed to fetch breeds. Response code: ${response.code()}"
+                    )
                 }
             }
 
@@ -202,11 +177,13 @@ class EditarFragment : Fragment() {
             }
         })
     }
+
     private fun logBreedsList(breedsList: List<String>) {
         for (breed in breedsList) {
-            Log.d("BreedsList", breed)
+            //Log.d("BreedsList", breed)
         }
     }
+
     private fun setupToolbar() {
         binding.contentToolbarEditar.toolbarEdit.setNavigationOnClickListener { onBackPressed() }
     }

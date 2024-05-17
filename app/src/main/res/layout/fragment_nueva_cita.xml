@@ -31,7 +31,6 @@
                 android:maxLength="15" /> <!-- Set the maximum length to 15 characters -->
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputRaza"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -51,7 +50,7 @@
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"/>
+                android:paddingEnd="8dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

@@ -16,38 +16,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import com.uv.dogappuv.view.utils.Constants
 import com.uv.dogappuv.view.webService.ApiService
 import com.uv.dogappuv.view.webService.DogBreedsResponse
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class NuevaCitaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private val citasViewModel by viewModels<CitasViewModel>()
-
 
     private lateinit var binding: FragmentNuevaCitaBinding
     private lateinit var apiService: ApiService
     private val breedsList = mutableListOf<String>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-
-
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://dog.ceo/api/")
+            .baseUrl(Constants.BASE_URL + "api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -59,13 +44,12 @@ class NuevaCitaFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
         binding = FragmentNuevaCitaBinding.inflate(inflater)
         binding.lifecycleOwner = this
         setupSpinner(binding)
         controladores(binding)
         setupToolbar()
-//        observerViewModel()
+        //observerViewModel()
         binding.btnSubmit.isEnabled = false
         fetchBreeds()
 
@@ -74,24 +58,34 @@ class NuevaCitaFragment : Fragment() {
 
     private fun fetchBreeds() {
         apiService.getBreedsList().enqueue(object : Callback<DogBreedsResponse> {
-            override fun onResponse(call: Call<DogBreedsResponse>, response: Response<DogBreedsResponse>) {
+            override fun onResponse(
+                call: Call<DogBreedsResponse>,
+                response: Response<DogBreedsResponse>
+            ) {
                 if (response.isSuccessful) {
                     val breedsResponse = response.body()
                     breedsResponse?.let {
                         if (it.status == "success") {
                             val breedsMap = it.message
                             val breedsList = mutableListOf<String>()
-                            breedsMap.values.forEach { list ->
-                                breedsList.addAll(list)
+                            breedsMap.forEach { (breed, _) ->
+                                breedsList.add(breed)
                             }
-                            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedsList)
-                             binding.etRaza.setAdapter(adapter)
+                            val adapter = ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_dropdown_item_1line,
+                                breedsList
+                            )
+                            binding.etRaza.setAdapter(adapter)
 
                             logBreedsList(breedsList)
                         }
                     }
                 } else {
-                    Log.e("fetchBreeds", "Failed to fetch breeds. Response code: ${response.code()}")
+                    Log.e(
+                        "fetchBreeds",
+                        "Failed to fetch breeds. Response code: ${response.code()}"
+                    )
                 }
             }
 
@@ -104,22 +98,22 @@ class NuevaCitaFragment : Fragment() {
 
     private fun logBreedsList(breedsList: List<String>) {
         for (breed in breedsList) {
-            Log.d("BreedsList", breed)
+            //Log.d("BreedsList", breed)
         }
     }
 
-//    private fun observerViewModel() {
-//        observerListBreeds()
-//    }
-//
-//    private fun observerListBreeds() {
-//        citasViewModel.getBreeds()
-//        citasViewModel.listBreeds.observe(viewLifecycleOwner) { lista ->
-//            val breed = lista[2]
-//            binding.etRaza.setText(breed.toString())
-//
-//        }
-//    }
+    /*    private fun observerViewModel() {
+            observerListBreeds()
+        }
+
+        private fun observerListBreeds() {
+            citasViewModel.getBreeds()
+            citasViewModel.listBreeds.observe(viewLifecycleOwner) { lista ->
+                val breed = lista[2]
+                binding.etRaza.setText(breed.toString())
+
+            }
+        }*/
 
     private fun setupToolbar() {
         binding.contentToolbar.toolbar.setNavigationOnClickListener { onBackPressed() }
@@ -142,28 +136,10 @@ class NuevaCitaFragment : Fragment() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter = adapter
-
-
-    }
-
-
-    companion object {
-
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NuevaCitaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 
     private fun controladores(binding: FragmentNuevaCitaBinding) {
         validarDatos()
-
-
         // Initially disable the submit button
         if (binding.btnSubmit.isEnabled) {
             binding.btnSubmit.setTextColor(
@@ -192,7 +168,6 @@ class NuevaCitaFragment : Fragment() {
         }
 
     }
-
 
     private fun saveCita(binding: FragmentNuevaCitaBinding) {
         val nombreMascota = binding.etNombreMascota.text.toString()
@@ -238,8 +213,6 @@ class NuevaCitaFragment : Fragment() {
             }
         }
     }
-
-
 }
 
 
