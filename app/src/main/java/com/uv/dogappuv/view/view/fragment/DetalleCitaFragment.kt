@@ -54,7 +54,7 @@ class DetalleCitaFragment : Fragment() {
         binding.tvRaza.text = "${receivedCita.razaMascota}"
         binding.tvPropietario.text = "${receivedCita.nombrePropietario}"
         binding.tvTelefono.text = "${receivedCita.telefonoPropietario}"
-        binding.tvId.text = "${receivedCita.id}"
+        binding.tvId.text = "#${receivedCita.id}"
         binding.tvSintoma.text = "${receivedCita.sintoma}"
         Glide.with(this).load(image).into(binding.ivFoto)
 
