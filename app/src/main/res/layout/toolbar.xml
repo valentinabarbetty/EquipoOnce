@@ -10,7 +10,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/tb"
-        app:navigationIcon="@drawable/back_36">
+        app:navigationIcon="@drawable/back_36"
+        app:buttonGravity="center_vertical">
 
         <!-- Title centered -->
         <TextView
@@ -19,7 +20,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="0dp"
-            android:layout_marginBottom="40dp"
             android:gravity="center"
             android:text="Nueva Cita"
             android:textColor="@android:color/white"

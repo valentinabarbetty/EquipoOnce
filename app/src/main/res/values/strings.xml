@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DogAppUV</string>
+    <string name="app_name">dogApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Fragment login</string>
     <string name="tituloInventario">Inventario</string>
