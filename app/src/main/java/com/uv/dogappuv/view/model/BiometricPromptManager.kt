@@ -21,20 +21,17 @@ class BiometricPromptManager(
         description: String
     ) {
         val manager = BiometricManager.from(activity)
-        val authenticators = if(Build.VERSION.SDK_INT >= 30) {
-            BIOMETRIC_STRONG or DEVICE_CREDENTIAL
-        } else BIOMETRIC_STRONG
+        val authenticators = BIOMETRIC_STRONG
 
-        val promptInfo = PromptInfo.Builder()
+        val promptInfoBuilder = PromptInfo.Builder()
             .setTitle(title)
             .setDescription(description)
+            .setNegativeButtonText("Cancelar")
             .setAllowedAuthenticators(authenticators)
 
-        if(Build.VERSION.SDK_INT < 30) {
-            promptInfo.setNegativeButtonText("Cancel")
-        }
+        val promptInfo = promptInfoBuilder.build()
 
-        when(manager.canAuthenticate(authenticators)) {
+        when (manager.canAuthenticate(authenticators)) {
             BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> {
                 resultChannel.trySend(BiometricResult.HardwareUnavailable)
                 return
@@ -69,7 +66,7 @@ class BiometricPromptManager(
                 }
             }
         )
-        prompt.authenticate(promptInfo.build())
+        prompt.authenticate(promptInfo)
     }
 
     sealed interface BiometricResult {

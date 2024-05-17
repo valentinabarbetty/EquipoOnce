@@ -55,8 +55,8 @@ class LoginFragment : Fragment() {
 
     private fun showBiometricPrompt() {
         biometricPromptManager.showBiometricPrompt(
-            title = "Biometric Authentication",
-            description = "Please authenticate using your biometric credential"
+            title = "Autenticación con Biometría",
+            description = "Ingrese su huella digital"
         )
     }
 
