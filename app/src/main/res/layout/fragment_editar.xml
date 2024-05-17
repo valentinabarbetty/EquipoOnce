@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.NuevaCitaFragment">
+        tools:context=".fragment.EditarFragment">
 
         <include
-            android:id="@+id/contentToolbar"
-            layout="@layout/toolbar" />
+            android:id="@+id/contentToolbar_editar"
+            layout="@layout/toolbar_edit" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputNombreMascota"
@@ -97,28 +97,18 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btnSubmit"
+            android:id="@+id/btnEdit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="150dp"
             android:backgroundTint="@color/rosa"
-            android:drawableLeft="@drawable/save_24"
+            android:drawableLeft="@drawable/edit_24"
             android:drawablePadding="8dp"
-            android:text="Guardar Cita"
+            android:text="Editar Cita"
             android:textColor="@android:color/darker_gray"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/inputTelefono"
-            app:layout_constraintStart_toStartOf="@id/inputTelefono"
-            app:layout_constraintTop_toBottomOf="@id/inputTelefono" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="30dp"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/rosa"
             app:layout_constraintStart_toStartOf="@id/inputTelefono"
             app:layout_constraintTop_toBottomOf="@id/inputTelefono" />
 

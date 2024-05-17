@@ -7,8 +7,8 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface ApiService {
-    @GET(Constants.ENDPOINT)
-    suspend fun getDogsBreeds(): MutableList<BreedsList>
+    @GET("breeds/list/all")
+    fun getBreedsList(): Call<DogBreedsResponse>
 
     @GET("{breed}/images/random")
     fun getImagenPerro(@Path("breed") breed: String): Call<ImageResponse>
@@ -16,5 +16,11 @@ interface ApiService {
 
 data class ImageResponse(
     val message: String,
+    val status: String
+)
+
+data class DogBreedsResponse(
+    val message: Map<String,
+            List<String>>,
     val status: String
 )

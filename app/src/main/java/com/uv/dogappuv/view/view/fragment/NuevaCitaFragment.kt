@@ -16,6 +16,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import com.uv.dogappuv.view.webService.ApiService
+import com.uv.dogappuv.view.webService.DogBreedsResponse
+import retrofit2.*
+import retrofit2.converter.gson.GsonConverterFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,6 +34,8 @@ class NuevaCitaFragment : Fragment() {
 
 
     private lateinit var binding: FragmentNuevaCitaBinding
+    private lateinit var apiService: ApiService
+    private val breedsList = mutableListOf<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +44,14 @@ class NuevaCitaFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://dog.ceo/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        apiService = retrofit.create(ApiService::class.java)
     }
 
     override fun onCreateView(
@@ -51,25 +65,61 @@ class NuevaCitaFragment : Fragment() {
         setupSpinner(binding)
         controladores(binding)
         setupToolbar()
-        observerViewModel()
+//        observerViewModel()
         binding.btnSubmit.isEnabled = false
+        fetchBreeds()
 
         return binding.root
     }
 
+    private fun fetchBreeds() {
+        apiService.getBreedsList().enqueue(object : Callback<DogBreedsResponse> {
+            override fun onResponse(call: Call<DogBreedsResponse>, response: Response<DogBreedsResponse>) {
+                if (response.isSuccessful) {
+                    val breedsResponse = response.body()
+                    breedsResponse?.let {
+                        if (it.status == "success") {
+                            val breedsMap = it.message
+                            val breedsList = mutableListOf<String>()
+                            breedsMap.values.forEach { list ->
+                                breedsList.addAll(list)
+                            }
+                            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, breedsList)
+                             binding.etRaza.setAdapter(adapter)
 
-    private fun observerViewModel() {
-        observerListBreeds()
+                            logBreedsList(breedsList)
+                        }
+                    }
+                } else {
+                    Log.e("fetchBreeds", "Failed to fetch breeds. Response code: ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<DogBreedsResponse>, t: Throwable) {
+                Log.e("fetchBreeds", "Error fetching breeds", t)
+                Toast.makeText(requireContext(), "Error fetching breeds", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
-    private fun observerListBreeds() {
-        citasViewModel.getBreeds()
-        citasViewModel.listBreeds.observe(viewLifecycleOwner) { lista ->
-            val breed = lista[2]
-            binding.etRaza.setText(breed.toString())
-
+    private fun logBreedsList(breedsList: List<String>) {
+        for (breed in breedsList) {
+            Log.d("BreedsList", breed)
         }
     }
+
+//    private fun observerViewModel() {
+//        observerListBreeds()
+//    }
+//
+//    private fun observerListBreeds() {
+//        citasViewModel.getBreeds()
+//        citasViewModel.listBreeds.observe(viewLifecycleOwner) { lista ->
+//            val breed = lista[2]
+//            binding.etRaza.setText(breed.toString())
+//
+//        }
+//    }
 
     private fun setupToolbar() {
         binding.contentToolbar.toolbar.setNavigationOnClickListener { onBackPressed() }

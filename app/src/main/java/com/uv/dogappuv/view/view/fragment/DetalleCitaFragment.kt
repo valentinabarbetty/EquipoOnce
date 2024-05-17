@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.uv.dogappuv.R
 import com.uv.dogappuv.databinding.FragmentDetalleCitaBinding
 import com.uv.dogappuv.view.model.Citas
 import com.uv.dogappuv.view.viewmodel.CitasViewModel
@@ -23,6 +24,7 @@ class DetalleCitaFragment : Fragment() {
     ): View? {
         binding = FragmentDetalleCitaBinding.inflate(inflater)
         binding.lifecycleOwner = this
+        setupToolbar()
         return binding.root
     }
 
@@ -42,8 +44,10 @@ class DetalleCitaFragment : Fragment() {
             bundle.putSerializable("dataCita", receivedCita)
             val detalleCitaFragment = DetalleCitaFragment()
             detalleCitaFragment.arguments = bundle
-            //findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
+            findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
         }
+
+
     }
 
     private fun dataCita() {
@@ -64,6 +68,13 @@ class DetalleCitaFragment : Fragment() {
         citasViewModel.deleteCita(receivedCita)
         citasViewModel.getListCitas()
         findNavController().popBackStack()
+    }
+    private fun setupToolbar() {
+        binding.ctDetalle.tbDetalle.setNavigationOnClickListener { onBackPressed() }
+    }
+
+    private fun onBackPressed() {
+        findNavController().navigate(R.id.action_fragment_detalle_cita_to_fragment_admin_citas)
     }
 
 }
